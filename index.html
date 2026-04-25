@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Yerba Store | El destino para vos que amás el mate</title>
+    <meta name="description" content="Yerba Store es el destino para vos que amás el mate. Mates, yerbas y accesorios de calidad. Envíos a todo el país.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Yerba Store">
+    <link rel="canonical" href="https://yerbastore.com/">
+
+    <meta property="og:title" content="Yerba Store | El destino para vos que amás el mate">
+    <meta property="og:description" content="Mates, yerbas y accesorios de calidad. Envíos a todo el país. Aseguramos calidad y buenos momentos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yerbastore.com/">
+    <meta property="og:image" content="https://yerbastore.com/images/hero.jpg">
+    <meta property="og:locale" content="es_AR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yerba Store | El destino para vos que amás el mate">
+    <meta name="twitter:description" content="Mates, yerbas y accesorios. Envíos a todo el país.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-leaf">🧉</span> Yerba Store
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#tienda">Tienda Online</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="cart-btn" class="btn-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>
+                El destino<br>
+                <span>para vos que<br>amás el mate</span>
+            </h1>
+
+            <p>Mates, yerbas y accesorios de calidad, pensados para los que viven el mate a full. Aseguramos calidad y buenos momentos en cada compra.</p>
+
+            <p class="hero-quote">Hay atardeceres que se toman con un mate y se guardan para siempre</p>
+
+            <div class="hero-buttons">
+                <a href="#tienda" class="btn-primary">Ver productos 🧉</a>
+                <a href="https://instagram.com/yerbastore_lv" target="_blank" rel="noopener noreferrer" class="btn-secondary">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="about">
+        <div class="about-card">
+            <h2>Nuestra Filosofía</h2>
+            <p>
+                En <strong>Yerba Store</strong> sabemos lo que significa el mate: es ritual, es compañía, es identidad. Por eso seleccionamos cada producto con cuidado, para que cada cebada sea perfecta. Somos el destino para vos que amás el mate de verdad.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- OFERTAS -->
+    <section id="ofertas" class="offers" style="display:none; padding: 4rem 5% 1rem 5%; background: var(--dark); position: relative;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(240,123,29,0.3), transparent);"></div>
+        <div class="shop-header">
+            <h2>Ofertas <span>Especiales</span></h2>
+            <p>Aprovechá estos descuentos únicos por tiempo limitado.</p>
+        </div>
+        <div class="product-grid" id="offers-product-grid"></div>
+    </section>
+
+    <!-- TIENDA -->
+    <section id="tienda" class="shop">
+        <div class="shop-header">
+            <h2>Tienda <span>Online</span></h2>
+            <p>Todo lo que necesitás para el mate perfecto.</p>
+        </div>
+
+        <div class="shop-filters-wrapper">
+            <p class="shop-filters-title">Encontrá tu producto ideal</p>
+            <div class="shop-filters">
+                <div class="filter-box">
+                    <label for="category-filter">Categoría</label>
+                    <select id="category-filter">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                <div class="filter-box">
+                    <label for="search-filter">Buscar producto</label>
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔎</span>
+                        <input type="text" id="search-filter" placeholder="Ej: mate, yerba, bombilla, termo...">
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button type="button" class="btn-secondary" id="clear-filters-btn">Limpiar filtros</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid" id="main-product-grid">
+            <p style="text-align:center; color:var(--font-muted); grid-column: 1 / -1;">Cargando productos... 🧉</p>
+        </div>
+
+        <div class="load-more-wrapper">
+            <button type="button" id="load-more-btn" class="btn-primary" style="display:none;">Ver más productos</button>
+        </div>
+    </section>
+
+    <!-- CARRITO SIDEBAR -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Mi Pedido</h2>
+            <button class="close-cart" onclick="toggleCart()">✖</button>
+        </div>
+
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Tu carrito está vacío 🧉</p>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+
+            <form id="checkout-form" class="checkout-form">
+                <input type="text" id="customer-name" placeholder="Nombre completo" required>
+                <input type="email" id="customer-email" placeholder="Tu email" required>
+
+                <label for="shipping-method">Tipo de envío:</label>
+                <select id="shipping-method" required>
+                    <option value="" disabled selected>Seleccioná una opción...</option>
+                    <option value="Envío local">Envío local (Las Varillas, Córdoba)</option>
+                    <option value="Correo Argentino">Envío por Correo Argentino</option>
+                </select>
+
+                <div id="local-shipping-fields" style="display:none;">
+                    <input type="text" id="customer-address-local" placeholder="Dirección de entrega en Las Varillas, Córdoba">
+                </div>
+
+                <div id="correo-shipping-fields" style="display:none;">
+                    <input type="text" id="customer-address-correo" placeholder="Dirección">
+                    <input type="text" id="customer-city" placeholder="Pueblo / Localidad">
+                    <input type="text" id="customer-province" placeholder="Provincia">
+                </div>
+
+                <label for="payment-method">Método de Pago:</label>
+                <select id="payment-method" required>
+                    <option value="" disabled selected>Elige cómo pagar...</option>
+                    <option value="Mercado Pago">💳 Mercado Pago / Transferencia</option>
+                    <option value="Efectivo contra entrega">💵 Efectivo (Al recibir)</option>
+                </select>
+
+                <button type="submit" class="btn-whatsapp" id="btn-continue">
+                    Continuar al Pago ➔
+                </button>
+            </form>
+
+            <div id="payment-step" class="payment-step" style="display:none;">
+                <h3>💳 Realizá tu pago</h3>
+                <p>Transferí el monto exacto: <span id="payment-amount"></span></p>
+
+                <div class="alias-box">
+                    <p>Alias: <strong>YerbaStore.lv</strong></p>
+                </div>
+
+                <p class="payment-instructions">
+                    1. Abrí tu app de Mercado Pago o banco y transferí el monto.<br>
+                    2. Sacá captura al comprobante.<br>
+                    3. Hacé clic abajo para enviarnos tu pedido y adjuntá la foto por WhatsApp.
+                </p>
+
+                <button id="btn-confirm-whatsapp" class="btn-whatsapp">
+                    Ya pagué, enviar a WhatsApp 📱
+                </button>
+                <button type="button" id="btn-back-cart" class="btn-text">Volver atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>🧉 Yerba Store</h3>
+                <p>Calidad, pasión y buenas vibras en cada compra.</p>
+                <br>
+                <p style="color:rgba(255,255,255,0.45); font-size:0.95rem;">📍 Las Varillas, Córdoba, Argentina</p>
+            </div>
+            <div class="footer-social">
+                <p>Seguinos en Instagram para novedades y promos:</p>
+                <a href="https://instagram.com/yerbastore_lv" target="_blank" rel="noopener noreferrer" class="social-link">@yerbastore_lv</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Yerba Store. Todos los derechos reservados.  - Navarrosoft</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Yerba Store",
+      "url": "https://yerbastore.com/",
+      "description": "El destino para vos que amás el mate. Mates, yerbas y accesorios de calidad.",
+      "sameAs": ["https://instagram.com/yerbastore_lv"]
+    }
+    </script>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
+

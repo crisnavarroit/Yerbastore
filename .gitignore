@@ -1,0 +1,6 @@
+# Archivos con credenciales - NO subir a GitHub
+config.php
+conexion.php
+
+# Sistema
+.DS_Store
